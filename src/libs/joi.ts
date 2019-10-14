@@ -11,6 +11,11 @@ export const signupValidation = (data: IUser) => {
         email: Joi
             .string()
             .required(),
+        name: Joi
+            .string()
+            .min(4)
+            .max(25)
+            .required(),
         password: Joi
             .string()
             .min(6)
