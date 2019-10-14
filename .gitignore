@@ -1,0 +1,12 @@
+# Dependency directory
+node_modules
+
+# Ignore built is files
+dist/
+
+# API keys and secrets
+.env
+
+# Developer Config files
+.eslintrc.js
+.prettierrc.js
