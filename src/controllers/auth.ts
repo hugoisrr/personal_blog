@@ -5,6 +5,12 @@ import User, { IUser } from '../models/User';
 import { signupValidation, signinValidation } from '../libs/joi';
 import jwt from 'jsonwebtoken';
 
+/**
+ * @route   POST api/auth/signup
+ * @desc    Register new user, validates email & returns token in header
+ * @access  Public
+ */
+
 export const signup = async (req: Request, res: Response) => {
     const { username, name, email, password } = req.body
     // Validation
@@ -44,6 +50,13 @@ export const signup = async (req: Request, res: Response) => {
     }
 };
 
+
+/**
+ * @route   POST api/auth/signin
+ * @desc    Authenticate user & get token
+ * @access  Public
+ */
+
 export const signin = async (req: Request, res: Response) => {  
     const { email, password } = req.body;
     const { error } = signinValidation(req.body);
@@ -57,6 +70,12 @@ export const signin = async (req: Request, res: Response) => {
     const token: string = jwt.sign({ _id: user._id }, process.env['TOKEN_SECRET'] || '');
     res.header('auth-token', token).json(token);
 };
+
+/**
+ * @route   GET api/auth/profile
+ * @desc    Authenticate user with token in header, return user's data
+ * @access  Private
+ */
 
 export const profile = async (req: Request, res: Response) => {
     const user = await User.findById(req.userId, { password: 0 });

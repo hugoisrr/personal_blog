@@ -42,8 +42,14 @@ const blogPostSchema = new Schema(
             type: String,
             required: true
         },
-        code: String,
-        video: String
+        code: {
+            type: String,
+            default: null
+        },
+        video: {
+            type: String,
+            default: null
+        }
     },
     {
         timestamps: true
